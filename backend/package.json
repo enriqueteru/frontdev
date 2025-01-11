@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "prisma": "prisma",
-    "seed": "node seed.js"
+    "seed": "node seed/init.js"
   },
   "author": "",
   "license": "ISC",

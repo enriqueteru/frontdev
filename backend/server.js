@@ -1,37 +1,49 @@
 const express = require("express");
 const cors = require("cors");
-const { PrismaClient } = require("@prisma/client");
+const myParser =require("body-parser")
 
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
+app.use(myParser.json({ limit: '256mb' }));
+app.use(myParser.urlencoded({ limit: '256mb', extended: true }));
+app.use(myParser.text({ limit: '256mb' }));
 
-const prisma = new PrismaClient();
+/**
+ * Utils
+ **/
+const HTTPSTATUSCODE = require("./utils/handleStatusCode");
 
+/**
+ * Hello World
+ **/
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hola mundo! ;)");
 });
 
-app.get("/api/users", async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
+/**
+ * Router
+ **/
+const base = "/api";
+app.use(base, require("./routes"));
+
+/**
+ * Errors
+ **/
+app.use((req, res, next) => {
+  let err = new Error();
+  err.status = 404;
+  err.message = HTTPSTATUSCODE[404];
+  next(err);
 });
 
-app.get("/api/config", async (req, res) => {
-  const config = await prisma.config.findFirst();
-  res.json(config);
+app.use((err, req, res, next) => {
+  return res.status(err.status || 500).json(err.message || "Unexpected error");
 });
 
-app.get("/api/project", async (req, res) => {
-  try {
-    const projects = await prisma.project.findMany();
-    res.json(projects);
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-    res.status(500).json({ error: "Failed to fetch projects" });
-  }
-});
-
+/**
+ * Server listen
+ **/
 const PORT = 5003;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

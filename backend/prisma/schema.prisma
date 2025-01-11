@@ -14,6 +14,7 @@ model Project {
   category   String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+  status     Boolean   @default(true)
   users      User[]
   images     Image[]
   tags       Tag[]
@@ -38,6 +39,7 @@ model User {
   id        Int       @id @default(autoincrement())
   name      String
   email     String    @unique
+  status    Boolean   @default(true)
   projects  Project[] 
 }
 
@@ -50,6 +52,7 @@ model Config {
   url         String
   logo        String
   social      Social[]
+  menus       Menu[]
 }
 
 model Social {
@@ -59,4 +62,21 @@ model Social {
   icon       String
   configId   Int
   config     Config @relation(fields: [configId], references: [id])
+}
+
+model Menu {
+  id         Int   @id @default(autoincrement())
+  name       String
+  links      Link[]
+  configId   Int
+  config     Config @relation(fields: [configId], references: [id])
+}
+
+model Link {
+  id         Int    @id @default(autoincrement())
+  name       String
+  url        String
+  menuId     Int
+  order      Int
+  menu       Menu   @relation(fields: [menuId], references: [id])
 }

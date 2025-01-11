@@ -1,0 +1,8 @@
+-- CreateTable
+CREATE TABLE "Menus" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    "configId" INTEGER NOT NULL,
+    CONSTRAINT "Menus_configId_fkey" FOREIGN KEY ("configId") REFERENCES "Config" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

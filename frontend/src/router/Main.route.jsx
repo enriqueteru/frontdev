@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Contact, Projects } from "@pages";
-import { MainLayout, ProjectLayout} from "@layouts";
+import { MainLayout, ProjectLayout } from "@layouts";
+import { NotFound } from "../pages";
 
 const MainRoutes = () => {
   return (
@@ -16,8 +17,9 @@ const MainRoutes = () => {
           {/* <Route path=":pid" element={<Project />} /> */}
         </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
 
-export default MainRoutes
+export default MainRoutes;
