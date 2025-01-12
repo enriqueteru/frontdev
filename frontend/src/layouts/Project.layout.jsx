@@ -1,11 +1,15 @@
 import { Outlet } from "react-router";
+import { Footer, Header } from "../components";
 
 const ProjectLayout = () => {
   return (
-    <div>
-      <h1>Project</h1>
-      <Outlet />
-    </div>
+    <>
+      <Header />
+      <main className="min-h-[80vh]">
+        <Outlet />
+      </main>
+      <Footer />
+    </>
   );
 };
 

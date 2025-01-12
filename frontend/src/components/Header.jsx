@@ -1,79 +1,73 @@
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
-    <header className="py-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <nav className="relative z-50 flex justify-between">
-          <div className="flex items-center md:gap-x-12">
-            <a aria-label="Home" href="#">
-             LOGO
-            </a>
-            <div className="hidden md:flex md:gap-x-6">
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                href="#features"
-              >
-                Servicios
-              </a>
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                href="#testimonials"
-              >
-                Sobre Nosotros
-              </a>
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                href="#pricing"
-              >
-                Contacto
-              </a>
+    <div className="px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl lg:max-w-7xl">
+        <header className="pt-6 sm:pt-6">
+          <div className="flex justify-between group/row relative isolate pt-[calc(theme(spacing.2)+1px)] last:pb-[calc(theme(spacing.2)+1px)]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2"
+            ></div>
+
+            <div className="relative flex gap-6">
+              <div className="py-3 group/item relative">
+                <div>
+                <a title="Home" onClick={() => navigate("/")} className="flex items-center cursor-pointer">
+                  <p className="font-semibold text-3xl">FrontDev</p>
+                  </a>
+                </div>
+     
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            <div className="hidden md:block">
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                href="/login"
-              >
-                Sign in
-              </a>
-            </div>
-            <a
-              className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-blue-600 text-white hover:text-slate-100 hover:bg-blue-500 active:bg-blue-800 active:text-blue-100 focus-visible:outline-blue-600"
-              href="/register"
+
+            {/* Navigation */}
+            <nav className="relative hidden lg:flex">
+              {[
+                { label: "Servicios", href: "/services" },
+                { label: "Proyectos", href: "/projects" },
+                { label: "Sobre Nosotros", href: "/about" },
+                { label: "Contacto", href: "/contact" },
+              ].map((link, index) => (
+                <div key={index} className="relative flex group/item">
+                  <a
+                    className="flex items-center px-4 py-3 text-base font-light text-gray-950 bg-blend-multiply data-[hover]:bg-black/[2.5%] cursor-pointer"
+                    onClick={() => navigate(link.href)}
+                  >
+                    {link.label}
+                  </a>
+                </div>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="flex size-12 items-center justify-center self-center rounded-lg data-[hover]:bg-black/5 lg:hidden"
+              aria-label="Open main menu"
+              type="button"
+              aria-expanded="false"
             >
-              <span>
-                Get started <span className="hidden lg:inline">today</span>
-              </span>
-            </a>
-            <div className="-mr-1 md:hidden">
-              <button
-                className="relative z-10 flex h-8 w-8 items-center justify-center"
-                aria-label="Toggle Navigation"
-                type="button"
-                aria-expanded="false"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+                className="size-6"
               >
-                <svg
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 overflow-visible stroke-slate-700"
-                  fill="none"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                >
-                  <path
-                    d="M0 1H14M0 7H14M0 13H14"
-                    className="origin-center transition"
-                  />
-                  <path
-                    d="M2 2L12 12M12 2L2 12"
-                    className="origin-center transition scale-90 opacity-0"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  fillRule="evenodd"
+                  d="M3 9a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 9Zm0 6.75a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
           </div>
-        </nav>
+        </header>
       </div>
-    </header>
+    </div>
   );
 };
 

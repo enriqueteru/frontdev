@@ -1,4 +1,4 @@
 import MainLayout from "./Main.layout";
 import ProjectLayout from "./Project.layout";
-
-export { MainLayout, ProjectLayout };
+import ServiceLayout from "./Services.layout";
+export { MainLayout, ProjectLayout, ServiceLayout };
